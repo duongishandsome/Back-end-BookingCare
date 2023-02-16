@@ -194,7 +194,7 @@ let getDetailDoctorById = (inputId) => {
                     nest: true,
                 });
                 if (data && data.image) {
-                    data.image = new Buffer(data.image, 'base64').toString('binary');
+                    data.image = Buffer.from(data.image, 'base64').toString('binary');
                 }
 
                 if (!data) data = {};
@@ -229,7 +229,7 @@ let bulkCreateSchedule = (data) => {
 
                 // get all existing data
                 let existing = await db.Schedule.findAll({
-                    where: { doctorId: data.doctorId, date: data.formattedDate },
+                    where: { doctorId: data.doctorId, date:''+ data.formattedDate },
                     attributes: ['timeType', 'date', 'doctorId', 'maxNumber'],
                     raw: true,
                 });
@@ -356,7 +356,7 @@ let getProfileDoctorById = (doctorId) => {
                     nest: true,
                 });
                 if (data && data.image) {
-                    data.image = new Buffer(data.image, 'base64').toString('binary');
+                    data.image = Buffer.from(data.image, 'base64').toString('binary');
                 }
 
                 if (!data) data = {};
